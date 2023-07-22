@@ -1,5 +1,4 @@
 {
-    {
   "routes": [
     {
       "route": "/*",
@@ -12,7 +11,7 @@
       "redirect": "/.auth/login/aad"
     }
   }
-},
+,
     "navigationFallback": {
         "rewrite": "/index.html"
     }
