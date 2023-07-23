@@ -2,24 +2,41 @@
   "routes": [
     {
       "route": "/login",
-      "redirect": "/.auth/login/aad"
+      "redirect": "/.auth/login/aadb2c"
     },
     {
       "route": "/logout",
-      "redirect": "/.auth/logout/aad"
+      "redirect": "/.auth/logout"
     },
     {
       "route": "/*",
       "allowedRoles": ["authenticated"]
     }
   ],
+  "responseOverrides": {
+    "401": {
+      "redirect": "/login",
+      "statusCode": 302
+    }
+  },
   "auth": {
     "identityProviders": {
-      "azureActiveDirectory": {
-        "registration": {
-          "openIdIssuer": "https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47/v2.0",
-          "clientIdSettingName": "AZURE_CLIENT_ID",
-          "clientSecretSettingName": "AZURE_CLIENT_SECRET"
+      "customOpenIdConnectProviders": {
+        "aadb2c": {
+          "registration": {
+            "clientIdSettingName": "AADB2C_PROVIDER_CLIENT_ID",
+            "clientCredential": {
+              "clientSecretSettingName": "AADB2C_PROVIDER_CLIENT_SECRET"
+            },
+            "openIdConnectConfiguration": {
+              "wellKnownOpenIdConfiguration": "https://hiyoshdirectory.b2clogin.com/hiyoshdirectory.onmicrosoft.com/B2C_1_signupsignin_hiyosh/v2.0/.well-known/openid-configuration"
+            }
+          },
+          "login": {
+            "nameClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+            "scopes": [],
+            "loginParameterNames": []
+          }
         }
       }
     }
