@@ -40,8 +40,5 @@
         }
       }
     }
-  },
-    "navigationFallback": {
-        "rewrite": "/index.html"
-    }
+  }
 }
